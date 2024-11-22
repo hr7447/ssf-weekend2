@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>Your Carts</h1>
+    <div th:each="cart : ${user.carts}">
+        <a th:href="@{/carts/{userId}/{cartName}(userId=${user.userId},cartName=${cart.key})}">
+            <span th:text="${cart.key + ' (' + cart.value.itemCount + ' items)'}"></span>
+        </a>
+    </div>
+
+    <form th:action="@{/carts/{userId}/new(userId=${user.userId})}" method="post">
+        <input type="text" name="cartName" placeholder="New Cart Name" required>
+        <button type="submit">New</button>
+    </form>
+
+</body>
+
+</html>
